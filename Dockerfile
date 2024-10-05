@@ -25,6 +25,6 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["python", "proxy.py"]
+CMD ["python3.8", "proxy.py"]
 
 
