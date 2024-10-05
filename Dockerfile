@@ -1,4 +1,4 @@
-⁷FROM python:3.9-alpine
+FROM python:3.9-alpine
 
 # Install necessary build dependencies for Python packages and SSL
 RUN apk add --no-cache \
@@ -17,7 +17,6 @@ ENV PATH="/proxy/venv/"
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-RUN pip install -U ua_generator requests
 
 WORKDIR /proxy
 
