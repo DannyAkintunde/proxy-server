@@ -9,7 +9,7 @@ RUN apk add --no-cache \
     python3-dev \
     linux-headers \
     bash \
-    python3-pip
+    py3-pip
 
 # Set up virtual environment for the proxy
 RUN python3 -m venv /proxy/venv
