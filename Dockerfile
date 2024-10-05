@@ -16,7 +16,7 @@ RUN python3 -m venv /proxy/venv
 ENV PATH="/proxy/venv/"
 
 # Install dependencies 
-COPY /proxy/venv .
+COPY /proxy/venv/ .
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
