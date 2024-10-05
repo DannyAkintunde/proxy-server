@@ -8,7 +8,8 @@ RUN apk add --no-cache \
     openssl-dev \
     python3-dev \
     linux-headers \
-    bash
+    bash \
+    python3-pip
 
 # Set up virtual environment for the proxy
 RUN python3 -m venv /proxy/venv
@@ -16,7 +17,7 @@ ENV PATH="/proxy/venv/"
 
 # Install dependencies 
 COPY requirements.txt .
-RUN python3.9 -m pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 WORKDIR /proxy
