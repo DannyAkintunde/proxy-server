@@ -11,7 +11,7 @@ RUN apk add --no-cache \
     bash
 
 # Set up virtual environment for the proxy
-RUN python3.9 -m venv /proxy/venv
+RUN python3 -m venv /proxy/venv
 ENV PATH="/proxy/venv/"
 
 # Install dependencies 
