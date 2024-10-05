@@ -14,8 +14,9 @@ RUN apk add --no-cache \
 RUN python3.9 -m venv /proxy/venv
 ENV PATH="/proxy/venv/"
 
+# Install dependencies 
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN python -m pip install -r requirements.txt
 
 
 WORKDIR /proxy
