@@ -11,6 +11,8 @@ RUN apk add --no-cache \
     bash \
     py3-pip
 
+WORKDIR /proxy
+
 # Set up virtual environment for the proxy
 RUN python3 -m venv /proxy/venv
 # activate virtual environment
@@ -20,9 +22,6 @@ ENV PATH="proxy/venv/bin:$PATH"
 # Install dependencies 
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-
-
-WORKDIR /proxy
 
 COPY . .
 
