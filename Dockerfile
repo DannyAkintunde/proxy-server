@@ -15,7 +15,7 @@ RUN python3.9 -m venv /proxy/venv
 ENV PATH="/proxy/venv/"
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 
 WORKDIR /proxy
