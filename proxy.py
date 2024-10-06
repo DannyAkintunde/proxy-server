@@ -5,13 +5,14 @@ import socket
 import ua_generator
 from ua_generator.options import Options
 from lib.HttpRequest import HTTPRequest
+from lib.httpserver import http_server
 
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 port = 8080
-host = '0.0.0.0'
+host = '127.0.0.1'
 
 #UAmanager = UserAgentManager()
 
@@ -71,7 +72,7 @@ def extract_host_and_port_from_request(request):
     http_version_start = request.find(b'HTTP/') + len(b'HTTP/')
     http_version_end = request.find(b'\r\n', http_version_start)
     http_version = request[http_version_start:http_version_end].decode('utf-8')
-    logging.info(host_string, http_version)
+    logging.info(f"{host_string} {http_version}")
     webserver_pos = host_string.find('/')
     if webserver_pos == -1:
         webserver_pos = len(host_string)
@@ -157,7 +158,9 @@ def handle_client_request(client_socket):
               client_request += client_data
               if b'\r\n\r\n' in client_request:  # Basic end of headers check
                   break
-              
+          is_serve = http_server(client_request, client_ssl_socket, logging)
+          if is_serve:
+            return
           logging.debug("client request: ", clean_request_headers(client_request).decode('utf-8'))
   
           # Relay data between client and destination
@@ -188,6 +191,9 @@ def handle_client_request(client_socket):
     else:
         # Handle regular HTTP requests
         host, port, version = extract_host_and_port_from_request(request)
+        is_serve = http_server(request, client_socket, logging)
+        if is_serve:
+            return
         try:
             destination_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             destination_socket.connect((host, port))

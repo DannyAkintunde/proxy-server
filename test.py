@@ -1,13 +1,14 @@
 import requests
 
 # Proxy server details
+# 65.21.202.154
 proxy = {
     "http": "http://127.0.0.1:8080",  # For HTTP connections
     "https": "http://127.0.0.1:8080",  # For HTTPS connections
 }
 
 # URL to test
-url = "https://httpbin.org/get"
+url = "http://youtube.com"
 
 try:
     # Make a request through the proxy

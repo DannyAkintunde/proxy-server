@@ -38,9 +38,9 @@ class HTTPRequest:
         if key in self.headers:
             del self.headers[key]
 
-    def get_header(self, key):
+    def get_header(self, key, defualt=None):
         """Get a header value."""
-        return self.headers.get(key)
+        return self.headers.get(key, defualt)
 
     def to_raw_request(self):
         """Convert the object back to a raw HTTP request string."""
